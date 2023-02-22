@@ -1,17 +1,20 @@
 import { useContext, useEffect, useState } from "react"
 
-import { langContext } from '../useContext/langContext';
+import { LangContext } from "../useContext/langContext";
 
+import { Navbar } from "../components/Navbar";
 import { Letter } from '../components/Letter';
 import { Endscreen } from "../components/EndScreen";
 import { Hangman } from "../components/Hangman";
 
 export const Home = () => {
 
+    const { lang } = useContext(LangContext);
+
     const [word, setWord] = useState(false);
     const [invisible, setInvisible] = useState(false);
     const [tryLetters, setTryLetters] = useState(12);
-    const [EndValue, setEndValue] = useState(null)
+    const [EndValue, setEndValue] = useState(null);
 
     const letter = 'abcdefghijklmnopqrstuvwxyz- '.split('');
 
@@ -22,7 +25,7 @@ export const Home = () => {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: new URLSearchParams({
-                'locale': 'fr-FR',
+                'locale': lang
             })
         })
             .then(res => res.json())
@@ -93,25 +96,28 @@ export const Home = () => {
     }, [invisible, tryLetters, word])
 
     return (
-        <div className="hangman__wrapper">
-            <Hangman tryLetters={tryLetters} />
-            <div className="hangman__container">
-                <p>Number of try {tryLetters}</p>
-                <h2 className="invisible-word">{invisible}</h2>
-                <div className="letter__container">
-                    {
-                        letter.map((letter, index) => {
-                            return (
-                                <Letter key={index} onClick={(e) => handleLetter(e)}>{letter}</Letter>
-                            )
-                        })
-                    }
+        <>
+            <Navbar onClick={() => handleRestart()} />
+            <div className="hangman__wrapper">
+                <Hangman tryLetters={tryLetters} />
+                <div className="hangman__container">
+                    <p>Number of try {tryLetters}</p>
+                    <h2 className="invisible-word">{invisible}</h2>
+                    <div className="letter__container">
+                        {
+                            letter.map((letter, index) => {
+                                return (
+                                    <Letter key={index} onClick={(e) => handleLetter(e)}>{letter}</Letter>
+                                )
+                            })
+                        }
+                    </div>
+                    <button className="btn--secondary" onClick={handleRestart}>Change word</button>
                 </div>
-                <button className="btn--secondary" onClick={handleRestart}>Change word</button>
+                {
+                    EndValue && <Endscreen message={EndValue} onClick={() => handleRestart()} word={word} />
+                }
             </div>
-            {
-                EndValue && <Endscreen message={EndValue} onClick={() => handleRestart()} word={word} />
-            }
-        </div>
+        </>
     )
 }

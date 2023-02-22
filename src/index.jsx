@@ -11,6 +11,9 @@ import './index.css';
 //page
 import { Home } from './pages/Home'
 
+//context
+import { LangContextProvider } from './useContext/langContext';
+
 const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path="/" element={<Home />} />
@@ -20,6 +23,8 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <LangContextProvider>
+      <RouterProvider router={router} />
+    </LangContextProvider>
   </React.StrictMode>
 );
