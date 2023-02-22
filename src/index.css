@@ -1,0 +1,158 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #23272F;
+  color: white;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+p,
+h2,
+h3 {
+  margin: 0;
+}
+
+.hangman__wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3%;
+}
+
+.hangman__container {
+  width: 500px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 45px;
+}
+
+.invisible-word {
+  letter-spacing: 4px;
+  text-transform: capitalize;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 2rem;
+}
+
+.letter__container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.letter__container .letter {
+  min-height: 40px;
+  width: 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: #16181D;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  transition: background-color .2s ease-in-out, transform .2s ease-in-out;
+  text-transform: uppercase;
+}
+
+.letter__container .letter:hover {
+  background-color: #16181Dbc;
+}
+
+.letter__container .letter:active {
+  transform: scale(.97);
+}
+
+.letter__container .letter:disabled {
+  background-color: #16181d66;
+  cursor: not-allowed;
+}
+
+.endscreen {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: #16181D;
+  padding: 25px 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 45px;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  border-radius: 3px;
+}
+
+.endscreen h3 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: #23272F;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  text-transform: uppercase;
+  transition: background-color .2s ease-in-out, transform .2s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #23272fbc;
+}
+
+.btn:active {
+  transform: scale(.97);
+}
+
+.btn--secondary {
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: #16181D;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  text-transform: uppercase;
+  transition: background-color .2s ease-in-out, transform .2s ease-in-out;
+}
+
+.btn--secondary:hover {
+  background-color: #16181Dbc;
+}
+
+.btn--secondary:active {
+  transform: scale(.97);
+}
+
+svg {
+  border: 1px solid white;
+  border-radius: 3px;
+}
