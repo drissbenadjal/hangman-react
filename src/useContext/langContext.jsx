@@ -1,10 +1,11 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import { get, set } from "../utils/storage-utlis";
 
 const LangContext = createContext();
 
 const LangContextProvider = ({ children }) => {
 
-    const [lang, setLang] = useState('fr-FR');
+    const [lang, setLang] = useState(get('lang') || 'fr-FR');
 
     const toggleLang = () => {
         if (lang === 'fr-FR') {
@@ -13,6 +14,10 @@ const LangContextProvider = ({ children }) => {
             setLang('fr-FR');
         }
     }
+
+    useEffect(() => {
+        set('lang', lang);
+    }, [lang])
 
     return (
         <LangContext.Provider value={{ lang, toggleLang }}>

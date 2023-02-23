@@ -81,6 +81,7 @@ nav {
 }
 
 .invisible-word {
+  min-height: 2rem;
   letter-spacing: 4px;
   text-transform: capitalize;
   -webkit-user-select: none;
