@@ -74,7 +74,6 @@ export const Home = () => {
     }
 
     const handleRestart = () => {
-        setEndValue(null);
         setTryLetters(12);
         fetchWord();
         const letterBtn = document.querySelectorAll('.letter');
@@ -83,6 +82,7 @@ export const Home = () => {
         })
         const hangman = document.querySelector('svg');
         hangman.innerHTML = '';
+        setEndValue(null);
     }
 
     useEffect(() => {
