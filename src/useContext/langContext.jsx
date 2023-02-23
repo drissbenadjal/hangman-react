@@ -4,8 +4,8 @@ import { get, set } from "../utils/storage-utlis";
 const LangContext = createContext();
 
 const LangContextProvider = ({ children }) => {
-
-    const [lang, setLang] = useState(get('lang') || 'fr-FR');
+    
+    const [lang, setLang] = useState(get('lang') === 'fr-FR' || get('lang') === 'en-GB' ? get('lang') : 'fr-FR');
 
     const toggleLang = () => {
         if (lang === 'fr-FR') {
