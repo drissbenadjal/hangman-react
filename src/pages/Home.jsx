@@ -30,7 +30,6 @@ export const Home = () => {
         })
             .then(res => res.json())
             .then(data => {
-                data.word = data.word.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 setWord(data.word)
                 console.log(data.word)
             })
@@ -45,8 +44,7 @@ export const Home = () => {
 
     useEffect(() => {
         if (word) {
-            const count = word.length;
-            const underscore = '_'.repeat(count);
+            const underscore = word.replace(/[a-z]/gi, '_').replace(/ /g, ' ').replace(/-/g, '-');
             setInvisible(underscore);
         }
     }, [word])
