@@ -4,8 +4,8 @@ import { LangContext } from "../useContext/langContext";
 
 import { Navbar } from "../components/Navbar";
 import { Letter } from '../components/Letter';
-import { Endscreen } from "../components/EndScreen";
 import { Hangman } from "../components/Hangman";
+import { Endscreen } from "../components/EndScreen";
 
 export const Home = () => {
 
@@ -33,6 +33,9 @@ export const Home = () => {
                 data.word = data.word.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 setWord(data.word)
                 console.log(data.word)
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 

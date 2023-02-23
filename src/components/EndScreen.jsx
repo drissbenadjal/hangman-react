@@ -8,7 +8,7 @@ export const Endscreen = ({ message, onClick, word }) => {
     }
 
     return (
-        <div className="endscreen">
+        <div className="screen">
             <h3>{messageAffiche}</h3>
             <p>The word was {word}</p>
             <button className="btn" onClick={onClick}>restart the game</button>
