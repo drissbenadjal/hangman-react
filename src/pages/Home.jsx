@@ -31,7 +31,7 @@ export const Home = () => {
             .then(res => res.json())
             .then(data => {
                 setWord(data.word)
-                console.log(data.word)
+                console.log(data.word + ' ' + lang)
             })
             .catch(err => {
                 console.log(err)
@@ -40,7 +40,7 @@ export const Home = () => {
 
     useEffect(() => {
         fetchWord();
-    }, [])
+    }, [lang])
 
     useEffect(() => {
         if (word) {
@@ -102,7 +102,11 @@ export const Home = () => {
             <div className="hangman__wrapper">
                 <Hangman tryLetters={tryLetters} />
                 <div className="hangman__container">
-                    <p>Number of try {tryLetters}</p>
+                    <p>
+                        {
+                            lang === 'en-GB' ? 'Number of try ' : 'Nombre de tentatives '
+                        }
+                        {tryLetters}</p>
                     <h2 className="invisible-word">{invisible}</h2>
                     <div className="letter__container">
                         {
@@ -113,7 +117,11 @@ export const Home = () => {
                             })
                         }
                     </div>
-                    <button className="btn--secondary" onClick={handleRestart}>Change word</button>
+                    <button className="btn--secondary" onClick={handleRestart}>
+                        {
+                            lang === 'en-GB' ? 'Change word' : 'Changer de mot'
+                        }
+                    </button>
                 </div>
                 {
                     EndValue && <Endscreen message={EndValue} onClick={() => handleRestart()} word={word} />
