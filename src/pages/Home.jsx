@@ -11,14 +11,15 @@ export const Home = () => {
 
     const { lang } = useContext(LangContext);
 
-    const [word, setWord] = useState(false);
-    const [invisible, setInvisible] = useState(false);
-    const [tryLetters, setTryLetters] = useState(12);
+    const [word, setWord] = useState('');
+    const DEFAULT_TRY = 11
+    const [tryLetters, setTryLetters] = useState(DEFAULT_TRY);
     const [EndValue, setEndValue] = useState(null);
+    const [invisible, setInvisible] = useState('');
 
     const letter = 'abcdefghijklmnopqrstuvwxyz- '.split('');
 
-    const fetchWord = async () => {
+    const fetchWord = () => {
         fetch('http://localhost:3001', {
             method: 'POST',
             headers: {
@@ -32,6 +33,8 @@ export const Home = () => {
             .then(data => {
                 setWord(data.word)
                 console.log(data.word + ' ' + lang)
+                const underscore = data.word.replace(/[a-z]/gi, '_').replace(/ /g, ' ').replace(/-/g, '-');
+                setInvisible(underscore);
             })
             .catch(err => {
                 console.log(err)
@@ -41,13 +44,6 @@ export const Home = () => {
     useEffect(() => {
         fetchWord();
     }, [lang])
-
-    useEffect(() => {
-        if (word) {
-            const underscore = word.replace(/[a-z]/gi, '_').replace(/ /g, ' ').replace(/-/g, '-');
-            setInvisible(underscore);
-        }
-    }, [word])
 
     const checkLetters = (letter) => {
         if (tryLetters === 0) return;
@@ -73,8 +69,29 @@ export const Home = () => {
         }
     }
 
-    const handleRestart = () => {
-        setTryLetters(12);
+    const handleKeyDown = (e) => {
+        if (word) {
+            if (!letter.includes(e.key.toLowerCase())) {
+                return;
+            }
+            const letterBtn = document.querySelectorAll('.letter');
+            letterBtn.forEach(btn => {
+                if (btn.innerText.toLowerCase() === e.key.toLowerCase()) {
+                    btn.click();
+                }
+            })
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        }
+    }, [word])
+
+    const handleRestart = async () => {
+        setTryLetters(DEFAULT_TRY);
         fetchWord();
         const letterBtn = document.querySelectorAll('.letter');
         letterBtn.forEach(btn => {

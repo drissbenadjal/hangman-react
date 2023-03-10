@@ -58,7 +58,7 @@ export const Hangman = ({ tryLetters }) => {
         const hangmanassetsSvg = hangmanassets.map(asset => asset.svg);
 
         for (let i = 0; i < hangmanassetsLength; i++) {
-            if (tryLetters === hangmanassetsError[i]) {
+            if (tryLetters === hangmanassetsError[i + 1]) {
                 hangman.innerHTML += hangmanassetsSvg[i];
             }
         }
